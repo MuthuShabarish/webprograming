@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Aetheria Voyages - Premium, curated luxury travel experiences designed for discerning travelers. Explore exotic destinations and custom itineraries.">
+  <title>Aetheria Voyages | Luxury Travel & Bespoke Curated Experiences</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- HEADER & NAVIGATION -->
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo" id="header-logo">
+        Aetheria<span>Voyages</span>
+      </a>
+
+      <!-- Checkbox Menu Hack for responsive mobile navigation -->
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="menu-toggle-label" id="hamburger-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nav-links">
+        <a href="index.html" class="active" id="nav-home">Home</a>
+        <a href="destinations.html" id="nav-destinations">Destinations</a>
+        <a href="about.html" id="nav-about">Our Experience</a>
+        <a href="contact.html" id="nav-contact">Inquire</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero"
+    style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');"
+    id="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Wander into the Extraordinary</h1>
+        <p>Bespoke journeys crafted for those who seek the exceptional. Explore curated destinations and experience
+          travel on a whole new tier.</p>
+        <div class="hero-btns">
+          <a href="destinations.html" class="btn btn-primary" id="hero-btn-explore">Explore Destinations</a>
+          <a href="contact.html" class="btn btn-outline" id="hero-btn-inquire">Plan Your Trip</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES / CORE VALUES SECTION -->
+  <section class="section-padding" id="features-section">
+    <div class="container text-center">
+      <h2 class="section-title">The Aetheria Distinction</h2>
+      <div class="destinations-grid" style="margin-top: 4rem;">
+
+        <div class="dest-card" style="box-shadow: none; border: 1px solid var(--clr-gray-light); text-align: left;"
+          id="feature-card-1">
+          <div class="dest-body" style="padding: 3rem 2rem;">
+            <div style="font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--clr-accent);">✧</div>
+            <h3 style="margin-bottom: 1rem;">Curated Luxury</h3>
+            <p style="color: var(--clr-gray);">Every accommodation, route, and local experience is personally vetted to
+              meet our uncompromising standards of refinement.</p>
+          </div>
+        </div>
+
+        <div class="dest-card" style="box-shadow: none; border: 1px solid var(--clr-gray-light); text-align: left;"
+          id="feature-card-2">
+          <div class="dest-body" style="padding: 3rem 2rem;">
+            <div style="font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--clr-accent);">☼</div>
+            <h3 style="margin-bottom: 1rem;">Tailored Itineraries</h3>
+            <p style="color: var(--clr-gray);">No pre-packaged tours. We construct your escape from the ground up,
+              customized completely around your interests and rhythm.</p>
+          </div>
+        </div>
+
+        <div class="dest-card" style="box-shadow: none; border: 1px solid var(--clr-gray-light); text-align: left;"
+          id="feature-card-3">
+          <div class="dest-body" style="padding: 3rem 2rem;">
+            <div style="font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--clr-accent);">🌍</div>
+            <h3 style="margin-bottom: 1rem;">Conscious Travel</h3>
+            <p style="color: var(--clr-gray);">We design trips that directly support conservation efforts and build
+              meaningful, ethical connections with local communities.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED DESTINATIONS -->
+  <section class="section-padding" style="background-color: var(--clr-white);" id="featured-destinations-section">
+    <div class="container text-center">
+      <h2 class="section-title">Featured Escapes</h2>
+      <p style="color: var(--clr-gray); max-width: 600px; margin: 1rem auto 0;">A selection of our most requested,
+        breathtaking voyages currently open for booking.</p>
+
+      <div class="destinations-grid">
+
+        <!-- Kyoto -->
+        <div class="dest-card" id="featured-kyoto">
+          <span class="dest-badge">Cultural</span>
+          <div class="dest-img-container">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80"
+              alt="Arashiyama Bamboo Grove in Kyoto, Japan">
+          </div>
+          <div class="dest-body" style="text-align: left;">
+            <h3>Kyoto, Japan</h3>
+            <p style="color: var(--clr-gray); margin-bottom: 1rem;">Immerse yourself in traditional teahouses,
+              moss-covered temples, and cherry blossom gardens.</p>
+            <div class="dest-meta">
+              <div class="dest-price">$4,850 <span>/ person</span></div>
+              <a href="contact.html" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.75rem;"
+                id="book-kyoto">Inquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Swiss Alps -->
+        <div class="dest-card" id="featured-alps">
+          <span class="dest-badge">Mountain</span>
+          <div class="dest-img-container">
+            <img src="https://images.unsplash.com/photo-1482862549707-f63cb32c5fd9?auto=format&fit=crop&w=800&q=80"
+              alt="Beautiful wooden cabin facing snowy Swiss Alps peaks">
+          </div>
+          <div class="dest-body" style="text-align: left;">
+            <h3>Zermatt, Switzerland</h3>
+            <p style="color: var(--clr-gray); margin-bottom: 1rem;">Experience mountain chalets, private heli-skiing,
+              and views of the Matterhorn.</p>
+            <div class="dest-meta">
+              <div class="dest-price">$6,200 <span>/ person</span></div>
+              <a href="contact.html" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.75rem;"
+                id="book-alps">Inquire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amalfi Coast -->
+        <div class="dest-card" id="featured-amalfi">
+          <span class="dest-badge">Beach</span>
+          <div class="dest-img-container">
+            <img src="https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=800&q=80"
+              alt="Cliffs and colourful houses of Positano, Amalfi Coast">
+          </div>
+          <div class="dest-body" style="text-align: left;">
+            <h3>Amalfi Coast, Italy</h3>
+            <p style="color: var(--clr-gray); margin-bottom: 1rem;">Sail private yachts along spectacular vertical
+              cliffs and colorful coastal villages.</p>
+            <div class="dest-meta">
+              <div class="dest-price">$5,400 <span>/ person</span></div>
+              <a href="contact.html" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.75rem;"
+                id="book-amalfi">Inquire</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <a href="destinations.html" class="btn btn-primary"
+        style="margin-top: 4rem; background-color: var(--clr-primary); color: var(--clr-white);"
+        id="view-all-destinations">View All Journeys</a>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-padding testimonials-section" id="testimonials-section">
+    <div class="container text-center">
+      <h2 class="section-title">Traveler Stories</h2>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card" id="testimonial-1">
+          <p>"Our journey to Kyoto with Aetheria was perfect. From our private tea ceremony to meeting a master
+            craftsman, they unlocked doors we couldn't have imagined."</p>
+          <div class="client-info">
+            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80"
+              alt="Elena Rostova" class="client-img">
+            <div class="client-details" style="text-align: left;">
+              <h4>Elena Rostova</h4>
+              <span>Kyoto Experience</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" id="testimonial-2">
+          <p>"Absolutely flawless execution. The luxury chalet in Zermatt was incredible, and our private ski guide was
+            highly knowledgeable. Highly recommended."</p>
+          <div class="client-info">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
+              alt="Marcus Vance" class="client-img">
+            <div class="client-details" style="text-align: left;">
+              <h4>Marcus Vance</h4>
+              <span>Alps Expedition</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card" id="testimonial-3">
+          <p>"They designed a relaxing Amalfi cruise for our anniversary. The yacht skipper was marvelous, and the
+            cliffside restaurants recommended were spectacular."</p>
+          <div class="client-info">
+            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"
+              alt="Sophia Lin" class="client-img">
+            <div class="client-details" style="text-align: left;">
+              <h4>Sophia Lin</h4>
+              <span>Amalfi Escape</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand" id="footer-brand-info">
+          <h3>Aetheria Voyages</h3>
+          <p>Crafting unique travel moments and customized itineraries for global explorers since 2012.</p>
+        </div>
+        <div class="footer-links" id="footer-menu">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="about.html">Our Experience</a></li>
+            <li><a href="contact.html">Inquire Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-links" id="footer-legal">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Travel Insurance</a></li>
+          </ul>
+        </div>
+        <div class="footer-newsletter" id="footer-signup">
+          <h4>Newsletter</h4>
+          <p>Receive exclusive trip packages and travel inspiration direct to your inbox.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+            <input type="email" placeholder="Your Email Address" required id="newsletter-email">
+            <button type="submit" class="btn btn-primary" style="padding: 0.8rem 1.5rem;"
+              id="newsletter-submit">Join</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aetheria Voyages. All rights reserved.</p>
+        <p>Made with ✧ using HTML & CSS</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

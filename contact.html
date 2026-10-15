@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Submit a travel inquiry or custom itinerary request. Our luxury travel consultants will design your next dream vacation.">
+  <title>Start Planning | Aetheria Voyages</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER & NAVIGATION -->
+  <header>
+    <div class="container nav-container">
+      <a href="index.html" class="logo" id="header-logo">
+        Aetheria<span>Voyages</span>
+      </a>
+      
+      <!-- Checkbox Menu Hack for responsive mobile navigation -->
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle" class="menu-toggle-label" id="hamburger-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nav-links">
+        <a href="index.html" id="nav-home">Home</a>
+        <a href="destinations.html" id="nav-destinations">Destinations</a>
+        <a href="about.html" id="nav-about">Our Experience</a>
+        <a href="contact.html" class="active" id="nav-contact">Inquire</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MINI HERO / HEADER -->
+  <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1920&q=80'); height: 50vh;" id="contact-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Bespoke Trip Planning</h1>
+        <p>Your journey begins here. Share your vision, and our specialists will bring it to life.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM & INFO SECTION -->
+  <section class="section-padding" style="background-color: var(--clr-light);" id="inquiry-form-section">
+    <div class="container">
+      <div class="contact-wrapper">
+        
+        <!-- Info Column -->
+        <div class="contact-info" id="contact-details-panel">
+          <div>
+            <h2>Connect with Us</h2>
+            <p>Our travel specialists are ready to curate your next unique expedition. Contact us directly or fill out the booking inquiry form.</p>
+          </div>
+
+          <div class="contact-details">
+            <div class="detail-item">
+              <div class="detail-icon">⚲</div>
+              <div>
+                <h4 style="color: var(--clr-white); font-family: var(--font-sans); font-size: 1rem;">Main Atelier</h4>
+                <p style="font-size: 0.9rem; color: var(--clr-gray);">102 Berkeley Sq, London W1J 6EN, UK</p>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon">☏</div>
+              <div>
+                <h4 style="color: var(--clr-white); font-family: var(--font-sans); font-size: 1rem;">Advisory Desk</h4>
+                <p style="font-size: 0.9rem; color: var(--clr-gray);">+44 (0) 20 7946 0958</p>
+              </div>
+            </div>
+
+            <div class="detail-item">
+              <div class="detail-icon">✉</div>
+              <div>
+                <h4 style="color: var(--clr-white); font-family: var(--font-sans); font-size: 1rem;">General Inquiries</h4>
+                <p style="font-size: 0.9rem; color: var(--clr-gray);">advisors@aetheriavoyages.com</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="font-size: var(--fs-sm); color: var(--clr-gray);">
+            Hours: Mon - Fri: 9:00 AM - 6:00 PM GMT
+          </div>
+        </div>
+
+        <!-- Form Column -->
+        <div class="contact-form-container" id="contact-form-panel">
+          <form id="travel-inquiry-form" action="process-inquiry.php" method="POST">
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="first-name">First Name *</label>
+                <input type="text" id="first-name" name="first_name" class="form-control" placeholder="Jane" required>
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name *</label>
+                <input type="text" id="last-name" name="last_name" class="form-control" placeholder="Doe" required>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="jane.doe@example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="+1 (555) 000-0000">
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="destination">Destination *</label>
+                <select id="destination" name="destination" class="form-control" required style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 10 10%22><polygon points=%220,2 10,2 5,8%22 fill=%22%230a222e%22/></svg>'); background-position: right 1.2rem center; background-repeat: no-repeat;">
+                  <option value="" disabled selected>Select Destination</option>
+                  <option value="kyoto">Kyoto, Japan</option>
+                  <option value="zermatt">Zermatt, Switzerland</option>
+                  <option value="amalfi">Amalfi Coast, Italy</option>
+                  <option value="borabora">Bora Bora, French Polynesia</option>
+                  <option value="machupicchu">Machu Picchu, Peru</option>
+                  <option value="banff">Banff National Park, Canada</option>
+                  <option value="other">Other Bespoke Location</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="budget">Est. Budget per Traveler *</label>
+                <select id="budget" name="budget" class="form-control" required style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%2210%22 viewBox=%220 0 10 10%22><polygon points=%220,2 10,2 5,8%22 fill=%22%230a222e%22/></svg>'); background-position: right 1.2rem center; background-repeat: no-repeat;">
+                  <option value="" disabled selected>Select Budget Tier</option>
+                  <option value="tier1">$2,000 - $5,000</option>
+                  <option value="tier2">$5,000 - $10,000</option>
+                  <option value="tier3">$10,000 - $20,000</option>
+                  <option value="tier4">Over $20,000 (Ultra Luxury)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group full-width" style="margin-bottom: 2rem;">
+              <label for="details">Trip Details & Custom Requests</label>
+              <textarea id="details" name="details" class="form-control" rows="5" placeholder="Share your travel dates, specific interests, or any custom accommodations you require..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1rem;" id="submit-inquiry-btn">Submit Trip Inquiry</button>
+          
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand" id="footer-brand-info">
+          <h3>Aetheria Voyages</h3>
+          <p>Crafting unique travel moments and customized itineraries for global explorers since 2012.</p>
+        </div>
+        <div class="footer-links" id="footer-menu">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="about.html">Our Experience</a></li>
+            <li><a href="contact.html">Inquire Now</a></li>
+          </ul>
+        </div>
+        <div class="footer-links" id="footer-legal">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Travel Insurance</a></li>
+          </ul>
+        </div>
+        <div class="footer-newsletter" id="footer-signup">
+          <h4>Newsletter</h4>
+          <p>Receive exclusive trip packages and travel inspiration direct to your inbox.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+            <input type="email" placeholder="Your Email Address" required id="newsletter-email">
+            <button type="submit" class="btn btn-primary" style="padding: 0.8rem 1.5rem;" id="newsletter-submit">Join</button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aetheria Voyages. All rights reserved.</p>
+        <p>Made with ✧ using HTML, CSS & JavaScript</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
