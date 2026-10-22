@@ -16,24 +16,24 @@
   --clr-gray: hsl(210, 10%, 60%);
   --clr-gray-light: hsl(210, 15%, 90%);
 
-  /* Typography Scale */
-  --fs-xl: clamp(2.5rem, 5vw + 1rem, 5rem);
-  --fs-lg: clamp(1.8rem, 3vw + 1rem, 3rem);
-  --fs-md: clamp(1.25rem, 2vw + 1rem, 2rem);
+  /* Typography Scale (Student-friendly fixed sizes with responsive media queries) */
+  --fs-xl: 3.25rem;
+  --fs-lg: 2.25rem;
+  --fs-md: 1.25rem;
   --fs-body: 1rem;
   --fs-sm: 0.875rem;
 
-  /* Shadows */
-  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  /* Standard, readable box-shadows */
+  --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
 
   /* Borders & Radii */
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
   
-  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition: all 0.3s ease;
 }
 
 /* --- RESET & BASICS --- */
@@ -152,8 +152,7 @@ header {
   left: 0;
   width: 100%;
   z-index: 1000;
-  background-color: rgba(10, 34, 46, 0.85);
-  backdrop-filter: blur(15px);
+  background-color: rgba(10, 34, 46, 0.95);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -212,17 +211,27 @@ header {
   color: var(--clr-accent);
 }
 
-/* Checkbox Hamburger Menu (No JS) */
-.menu-toggle-label {
+/* Navigation Actions (Wishlist & Currency) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Mobile Hamburger Menu Button */
+.hamburger-btn, .menu-toggle-label {
   display: none;
+  background: none;
+  border: none;
   flex-direction: column;
   gap: 6px;
   cursor: pointer;
+  padding: 4px;
 }
 
-.menu-toggle-label span {
-  width: 30px;
-  height: 3px;
+.hamburger-btn span, .menu-toggle-label span {
+  width: 26px;
+  height: 2px;
   background-color: var(--clr-white);
   border-radius: 2px;
   transition: var(--transition);
@@ -747,12 +756,26 @@ footer {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --fs-xl: 2.25rem;
+    --fs-lg: 1.75rem;
+    --fs-md: 1.15rem;
+  }
+
   header {
     background-color: var(--clr-primary);
   }
 
-  .menu-toggle-label {
+  .menu-toggle-label, .hamburger-btn {
     display: flex;
+  }
+
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
+  .wishlist-label {
+    display: none;
   }
 
   .nav-links {
@@ -765,25 +788,29 @@ footer {
     flex-direction: column;
     align-items: center;
     padding-top: 4rem;
-    gap: 3rem;
+    gap: 2.5rem;
     transition: var(--transition);
     z-index: 999;
   }
 
-  #menu-toggle:checked ~ .nav-links {
+  #menu-toggle:checked ~ .nav-links,
+  .nav-links.active {
     left: 0;
   }
 
   /* Hamburger transform when menu toggled */
-  #menu-toggle:checked ~ .menu-toggle-label span:nth-child(1) {
+  #menu-toggle:checked ~ .menu-toggle-label span:nth-child(1),
+  .hamburger-btn.active span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 6px);
   }
 
-  #menu-toggle:checked ~ .menu-toggle-label span:nth-child(2) {
+  #menu-toggle:checked ~ .menu-toggle-label span:nth-child(2),
+  .hamburger-btn.active span:nth-child(2) {
     opacity: 0;
   }
 
-  #menu-toggle:checked ~ .menu-toggle-label span:nth-child(3) {
+  #menu-toggle:checked ~ .menu-toggle-label span:nth-child(3),
+  .hamburger-btn.active span:nth-child(3) {
     transform: rotate(-45deg) translate(6px, -6px);
   }
 
@@ -802,17 +829,15 @@ footer {
 
 /* Sticky Header on Scroll */
 header.scrolled {
-  background-color: rgba(10, 34, 46, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  border-bottom: 1px solid rgba(212, 160, 23, 0.2);
+  background-color: var(--clr-primary);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(212, 160, 23, 0.3);
 }
 
 /* Currency Converter Selector */
 .currency-selector-wrapper {
-  margin-left: auto;
-  margin-right: 1.5rem;
+  display: flex;
+  align-items: center;
 }
 
 .currency-dropdown {
@@ -852,7 +877,6 @@ header.scrolled {
   font-family: var(--font-sans);
   font-size: 0.85rem;
   cursor: pointer;
-  margin-right: 1rem;
   transition: var(--transition);
 }
 
@@ -884,11 +908,9 @@ header.scrolled {
   position: absolute;
   top: 1rem;
   left: 1rem;
-  background: rgba(10, 34, 46, 0.75);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.8);
+  background: rgba(10, 34, 46, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.9);
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -898,7 +920,7 @@ header.scrolled {
   justify-content: center;
   cursor: pointer;
   z-index: 5;
-  transition: transform 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+  transition: all 0.25s ease;
 }
 
 .wishlist-toggle-btn:hover {
@@ -1003,9 +1025,7 @@ header.scrolled {
 .aetheria-modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(10, 34, 46, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background-color: rgba(10, 34, 46, 0.8);
   z-index: 9999;
   display: flex;
   align-items: center;
@@ -1028,15 +1048,15 @@ header.scrolled {
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(212, 160, 23, 0.3);
   position: relative;
-  transform: scale(0.95) translateY(10px);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(15px);
+  transition: transform 0.3s ease;
 }
 
 .aetheria-modal-overlay.active .aetheria-modal-dialog {
-  transform: scale(1) translateY(0);
+  transform: translateY(0);
 }
 
 .aetheria-modal-header {

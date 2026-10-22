@@ -15,14 +15,6 @@
       <a href="index.html" class="logo" id="header-logo">
         Aetheria<span>Voyages</span>
       </a>
-      
-      <!-- Checkbox Menu Hack for responsive mobile navigation -->
-      <input type="checkbox" id="menu-toggle">
-      <label for="menu-toggle" class="menu-toggle-label" id="hamburger-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
 
       <nav class="nav-links">
         <a href="index.html" id="nav-home">Home</a>
@@ -30,6 +22,29 @@
         <a href="about.html" class="active" id="nav-about">Our Experience</a>
         <a href="contact.html" id="nav-contact">Inquire</a>
       </nav>
+
+      <div class="nav-actions">
+        <button id="wishlist-nav-btn" class="wishlist-nav-btn" type="button" aria-label="View Saved Escapes">
+          <span class="heart-icon">♥</span>
+          <span class="wishlist-label">Saved</span>
+          <span id="wishlist-count-badge" class="wishlist-count">0</span>
+        </button>
+
+        <div id="currency-selector-wrapper" class="currency-selector-wrapper">
+          <select id="currency-select" aria-label="Select Currency" class="currency-dropdown">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="JPY">JPY (¥)</option>
+          </select>
+        </div>
+
+        <button type="button" class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </header>
 

@@ -1,15 +1,14 @@
 /**
  * Aetheria Voyages - React Destinations Component
  * 
- * Demonstrates progressive enhancement by integrating React into a traditional
- * multi-page website for selected, highly dynamic UI components (Destinations catalog,
- * reusable DestinationCard, category filtering, live search, and interactive state).
+ * Simple, beginner-friendly functional components demonstrating:
+ * - Functional components & Props
+ * - useState for category filter, search query, and wishlist
+ * - Array.prototype.filter() for live searching
  */
-(function() {
-  const { useState, useEffect, useMemo } = React;
 
-  // Curated destinations dataset matching the original site content
-  const DESTINATIONS_LIST = [
+// Curated destinations dataset
+const DESTINATIONS_LIST = [
   {
     id: 'kyoto',
     name: 'Kyoto, Japan',
@@ -86,8 +85,8 @@ const CATEGORIES = [
 ];
 
 /**
- * Reusable DestinationCard Component
- * Encapsulates card rendering, category badges, wishlist toggle, quick view, and dynamic pricing.
+ * DestinationCard Component
+ * Displays individual trip card with image, details, price, and actions
  */
 function DestinationCard({ destination, isWishlisted, onToggleWishlist, onQuickView, formattedPrice }) {
   const { id, name, shortName, category, categoryLabel, image, alt, description, basePriceUsd } = destination;
@@ -100,10 +99,9 @@ function DestinationCard({ destination, isWishlisted, onToggleWishlist, onQuickV
         <button
           type="button"
           className={`wishlist-toggle-btn ${isWishlisted ? 'active' : ''}`}
-          aria-label={isWishlisted ? `Remove ${name} from saved escapes` : `Save ${name} to wishlist`}
+          aria-label={isWishlisted ? `Remove ${name} from saved` : `Save ${name}`}
           onClick={(e) => {
             e.preventDefault();
-            e.stopPropagation();
             onToggleWishlist(name);
           }}
         >
@@ -117,10 +115,8 @@ function DestinationCard({ destination, isWishlisted, onToggleWishlist, onQuickV
         <button
           type="button"
           className="btn-quick-view"
-          aria-label={`View details for ${name}`}
           onClick={(e) => {
             e.preventDefault();
-            e.stopPropagation();
             onQuickView(destination, formattedPrice);
           }}
         >
@@ -146,163 +142,149 @@ function DestinationCard({ destination, isWishlisted, onToggleWishlist, onQuickV
 }
 
 /**
- * Filter & Search Bar Controls
+ * DestinationControls Component
+ * Search input and category filter buttons
  */
-function DestinationControls({
-  categories,
-  activeCategory,
-  onSelectCategory,
-  searchQuery,
-  onSearchChange,
-  onClearSearch,
-  totalResults
-}) {
+function DestinationControls({ categories, activeCategory, onSelectCategory, searchQuery, onSearchChange, onClearSearch, totalResults }) {
   return (
     <div className="destinations-controls-wrapper">
-      {/* Live Search Bar */}
+      {/* Search Bar */}
       <div className="destinations-search-bar">
         <div className="search-input-wrapper">
-          <span className="search-icon" aria-hidden="true">🔍</span>
+          <span className="search-icon">🔍</span>
           <input
             type="text"
             id="destinations-search-input"
-            placeholder="Search by destination, country, or keyword..."
-            aria-label="Search destinations"
+            placeholder="Search by destination or keyword..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
           />
           {searchQuery && (
             <button
               type="button"
-              id="search-clear-btn"
               className="search-clear-btn"
-              title="Clear search"
               onClick={onClearSearch}
             >
               ✕
             </button>
           )}
         </div>
-        <div className="results-count-badge" id="results-count">
+        <div className="results-count-badge">
           Showing {totalResults} {totalResults === 1 ? 'escape' : 'escapes'}
         </div>
       </div>
 
       {/* Category Tabs */}
-      <div className="filter-controls" id="filter-buttons-container" role="tablist" aria-label="Destination Categories">
-        {categories.map((cat) => {
-          const isActive = activeCategory === cat.id;
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              className={`filter-btn ${isActive ? 'active' : ''}`}
-              id={`lbl-filter-${cat.id}`}
-              onClick={() => onSelectCategory(cat.id)}
-            >
-              {cat.label}
-            </button>
-          );
-        })}
+      <div className="filter-controls">
+        {categories.map((cat) => (
+          <button
+            key={cat.id}
+            type="button"
+            className={`filter-btn ${activeCategory === cat.id ? 'active' : ''}`}
+            onClick={() => onSelectCategory(cat.id)}
+          >
+            {cat.label}
+          </button>
+        ))}
       </div>
     </div>
   );
 }
 
 /**
- * Main Destinations Catalog App Component
+ * Main DestinationsApp Component
  */
 function DestinationsApp() {
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [wishlist, setWishlist] = useState(() => {
-    if (window.Aetheria && typeof window.Aetheria.getWishlist === 'function') {
-      return window.Aetheria.getWishlist();
-    }
+  const [activeCategory, setActiveCategory] = React.useState('all');
+  const [searchQuery, setSearchQuery] = React.useState('');
+  
+  // Wishlist state initialized from localStorage
+  const [wishlist, setWishlist] = React.useState(() => {
     try {
       return JSON.parse(localStorage.getItem('aetheria_wishlist')) || [];
-    } catch {
+    } catch (e) {
       return [];
     }
   });
 
-  const [currency, setCurrency] = useState(() => {
-    if (window.Aetheria && typeof window.Aetheria.getCurrentCurrency === 'function') {
-      return window.Aetheria.getCurrentCurrency();
-    }
+  // Currency state initialized from localStorage
+  const [currency, setCurrency] = React.useState(() => {
     return localStorage.getItem('aetheria_currency') || 'USD';
   });
 
-  // Listen to cross-component events triggered by existing vanilla script.js
-  useEffect(() => {
-    const handleWishlistChange = (e) => {
-      if (e.detail && Array.isArray(e.detail.wishlist)) {
-        setWishlist(e.detail.wishlist);
-      } else if (window.Aetheria) {
-        setWishlist(window.Aetheria.getWishlist());
-      }
-    };
-
-    const handleCurrencyChange = (e) => {
+  // Listen for changes from header dropdown or wishlist modal
+  React.useEffect(() => {
+    function handleCurrencyChange(e) {
       if (e.detail && e.detail.currency) {
         setCurrency(e.detail.currency);
       }
-    };
+    }
+    function handleWishlistChange(e) {
+      if (e.detail && Array.isArray(e.detail.wishlist)) {
+        setWishlist(e.detail.wishlist);
+      }
+    }
 
-    window.addEventListener('wishlistchange', handleWishlistChange);
     window.addEventListener('currencychange', handleCurrencyChange);
+    window.addEventListener('wishlistchange', handleWishlistChange);
 
     return () => {
-      window.removeEventListener('wishlistchange', handleWishlistChange);
       window.removeEventListener('currencychange', handleCurrencyChange);
+      window.removeEventListener('wishlistchange', handleWishlistChange);
     };
   }, []);
 
   // Format price helper
-  const getFormattedPrice = (usdPrice) => {
-    if (window.Aetheria && typeof window.Aetheria.formatPrice === 'function') {
-      return window.Aetheria.formatPrice(usdPrice, currency);
+  function getFormattedPrice(usdPrice) {
+    if (typeof window.formatPrice === 'function') {
+      return window.formatPrice(usdPrice, currency);
     }
-    // Fallback USD formatting
     return `$${usdPrice.toLocaleString()}`;
-  };
+  }
 
   // Toggle wishlist item
-  const handleToggleWishlist = (destName) => {
-    if (window.Aetheria && typeof window.Aetheria.toggleWishlist === 'function') {
-      window.Aetheria.toggleWishlist(destName);
+  function handleToggleWishlist(destName) {
+    let nextList;
+    if (wishlist.includes(destName)) {
+      nextList = wishlist.filter(item => item !== destName);
+      if (typeof window.showToast === 'function') {
+        window.showToast(`Removed "${destName}" from saved escapes.`, 'info');
+      }
     } else {
-      const exists = wishlist.includes(destName);
-      const nextList = exists ? wishlist.filter(item => item !== destName) : [...wishlist, destName];
-      setWishlist(nextList);
-      localStorage.setItem('aetheria_wishlist', JSON.stringify(nextList));
+      nextList = [...wishlist, destName];
+      if (typeof window.showToast === 'function') {
+        window.showToast(`Saved "${destName}" to your wishlist!`, 'success');
+      }
     }
-  };
 
-  // Open itinerary details modal
-  const handleQuickView = (destination, formattedPrice) => {
-    if (window.Aetheria && typeof window.Aetheria.openDestinationModal === 'function') {
-      window.Aetheria.openDestinationModal(destination.name, destination.image, `${formattedPrice} / person`);
+    setWishlist(nextList);
+    localStorage.setItem('aetheria_wishlist', JSON.stringify(nextList));
+
+    if (typeof window.updateWishlistBadge === 'function') {
+      window.updateWishlistBadge();
+    }
+    window.dispatchEvent(new CustomEvent('wishlistchange', { detail: { wishlist: nextList } }));
+  }
+
+  // Open itinerary modal
+  function handleQuickView(destination, formattedPrice) {
+    if (typeof window.openDestinationModal === 'function') {
+      window.openDestinationModal(destination.name, destination.image, `${formattedPrice} / person`);
     } else {
       alert(`${destination.name}\n${destination.description}\nPrice: ${formattedPrice}`);
     }
-  };
+  }
 
-  // Filter logic
-  const filteredDestinations = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-    return DESTINATIONS_LIST.filter((dest) => {
-      const matchesCategory = activeCategory === 'all' || dest.category === activeCategory;
-      const matchesSearch =
-        !query ||
-        dest.name.toLowerCase().includes(query) ||
-        dest.description.toLowerCase().includes(query) ||
-        dest.categoryLabel.toLowerCase().includes(query);
-      return matchesCategory && matchesSearch;
-    });
-  }, [activeCategory, searchQuery]);
+  // Simple array filter (no useMemo needed)
+  const query = searchQuery.trim().toLowerCase();
+  const filteredDestinations = DESTINATIONS_LIST.filter((dest) => {
+    const matchesCategory = activeCategory === 'all' || dest.category === activeCategory;
+    const matchesSearch = !query ||
+      dest.name.toLowerCase().includes(query) ||
+      dest.description.toLowerCase().includes(query) ||
+      dest.categoryLabel.toLowerCase().includes(query);
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <div className="react-destinations-wrapper">
@@ -316,7 +298,6 @@ function DestinationsApp() {
         totalResults={filteredDestinations.length}
       />
 
-      {/* Destinations Grid */}
       {filteredDestinations.length > 0 ? (
         <div className="destinations-grid">
           {filteredDestinations.map((dest) => (
@@ -331,11 +312,10 @@ function DestinationsApp() {
           ))}
         </div>
       ) : (
-        <div style={{ textAlign: 'center', padding: '4rem 1rem', background: 'var(--clr-white)', borderRadius: 'var(--radius-md)', marginTop: '2rem', boxShadow: 'var(--shadow-sm)' }}>
-          <p style={{ fontSize: '2.5rem', color: 'var(--clr-accent)', marginBottom: '1rem' }}>✧</p>
-          <h3 style={{ marginBottom: '0.5rem' }}>No Destinations Match Your Search</h3>
-          <p style={{ color: 'var(--clr-gray)', maxWidth: '500px', margin: '0 auto 1.5rem' }}>
-            We could not find any luxury escapes matching &ldquo;{searchQuery}&rdquo;. Try another term or reset your filters.
+        <div style={{ textAlign: 'center', padding: '3rem 1rem', background: 'var(--clr-white)', borderRadius: 'var(--radius-md)', marginTop: '2rem' }}>
+          <h3>No Destinations Found</h3>
+          <p style={{ color: 'var(--clr-gray)', margin: '0.75rem 0 1.5rem' }}>
+            No escapes matched &ldquo;{searchQuery}&rdquo;. Try another search or reset filters.
           </p>
           <button
             type="button"
@@ -345,7 +325,7 @@ function DestinationsApp() {
               setSearchQuery('');
             }}
           >
-            Reset All Filters
+            Reset Filters
           </button>
         </div>
       )}
@@ -353,10 +333,9 @@ function DestinationsApp() {
   );
 }
 
-// Mount the React Application into the specified container
-const mountContainer = document.getElementById('react-destinations-root');
-if (mountContainer) {
-  const root = ReactDOM.createRoot(mountContainer);
+// Render React into container
+const rootContainer = document.getElementById('react-destinations-root');
+if (rootContainer) {
+  const root = ReactDOM.createRoot(rootContainer);
   root.render(<DestinationsApp />);
 }
-})();
